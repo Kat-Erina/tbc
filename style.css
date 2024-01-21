@@ -1,7 +1,9 @@
 :root {
   --text-color: rgb(247, 244, 244);
   --x-color: rgb(126, 119, 119);
-  --blue-color: rgb(68, 160, 246);
+  --blue-color: rgb(69, 186, 240);
+  --dark-black-color: rgb(19, 19, 19);
+  --bg-color-2: rgb(38, 36, 36);
 }
 
 * {
@@ -10,8 +12,7 @@
   padding: 0;
 }
 body {
-  background-color: rgb(38, 36, 36);
-  /* font-family: "BPG Nino Mkhedruli"; */
+  background-color: var(--bg-color-2);
 }
 
 /* styling sideBar  */
@@ -20,13 +21,11 @@ body {
   top: 0;
   right: 0;
   height: 100vh;
-  /* width: 65vw; */
   width: 0;
   float: right;
-  z-index: 2;
+  z-index: 4;
   transition: all 0.4s ease-in;
 }
-/* transition: all 0.4s ease-in; */
 
 .sideHeader {
   height: 10%;
@@ -39,21 +38,23 @@ body {
 .menu {
   display: flex;
   justify-content: right;
-  background-color: rgb(38, 36, 36);
+  background-color: var(--bg-color-2);
 }
 .menuList {
   text-align: right;
   list-style: none;
-  color: var(--text-color);
-  font-weight: 500;
-  font-size: 16px;
-  font-family: "Helvetica";
-  /* transition: all 0.4s ease-in; */
 }
 .menuList li {
   padding-top: 40px;
-  font-weight: lighter;
-  width: fit-content;
+  text-wrap: nowrap;
+}
+.menuList li a {
+  text-align: right;
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight: 500;
+  font-size: 17px;
+  font-family: "Helvetica";
 }
 
 .fa-solid {
@@ -63,10 +64,6 @@ body {
   color: var(--x-color);
 }
 
-/* .closeMenuStyle {
-  width: 0;
-  transition: all 0.4s ease-in;
-} */
 .invisible {
   visibility: hidden;
   width: 0;
@@ -85,10 +82,15 @@ header {
   align-items: center;
   height: 12vh;
   z-index: 1;
-  background-color: rgb(38, 36, 36);
-  /* aq vamateb axla scroll functions */
-  /* transition: all 1s ease-in; */
+  background-color: var(--bg-color-2);
+  transition: all 0.4s ease-in;
 }
+
+.unsticky {
+  margin-top: -20vh;
+}
+/* styling header to unstick */
+
 .logo {
   /* position: relative; */
   z-index: 1;
@@ -100,14 +102,15 @@ header {
   text-align: center;
   padding-left: 20px;
   height: 100%;
-  /* align-items: center; */
-  /* padding-top: 5px; */
+
   color: var(--text-color);
 }
 nav {
+  position: relative;
   width: 50%;
   border: 1px solid red;
   height: 100%;
+  visibility: visible;
 }
 img {
   width: 50px;
@@ -183,7 +186,7 @@ nav {
 /*styling coursesContainer */
 .coursesContainer {
   padding: 20px;
-  background-color: rgb(19, 19, 19);
+  background-color: var(--dark-black-color);
 }
 .coursesContainer h1 {
   font-size: 30px;
@@ -234,4 +237,147 @@ nav {
 .childCourse div p a span {
   color: var(--blue-color);
   text-decoration: none;
+}
+
+/* styling a darker screen */
+.darker {
+  width: 100%;
+  background-color: rgba(11, 8, 8, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  transition: all 0.01s ease-in-out;
+}
+
+/* styling partners container */
+
+.partners {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 20px 20px 20px;
+  color: var(--text-color);
+  font-size: 25px;
+  position: relative;
+  /* overflow: hidden; */
+}
+.partnersContainer {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  position: relative;
+  overflow: hidden;
+
+  /* display: flex; */
+  transition: transform 0.5s ease-in-out;
+}
+.partner {
+  display: flex;
+  /* position: absolute; */
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 25px;
+  padding-right: 30px;
+  transform: translateX(0);
+  transition: all 0.5s ease-in;
+  flex: 0 0 100%;
+}
+.partner img {
+  margin-top: 60px;
+  width: 90%;
+  height: 20%;
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  border: 1px solid red;
+  margin-top: 25px;
+  margin-bottom: 15px;
+}
+.dot {
+  background-color: var(--text-color);
+  height: 8px;
+  width: 8px;
+  border-radius: 50%;
+  margin: 0 8px;
+}
+
+.hidden {
+  display: none;
+}
+
+/* styling Q&A */
+
+.questionsMainContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding: 40px 20px 0px 20px;
+  background-color: var(--dark-black-color);
+}
+
+.questionsContainer {
+  display: flex;
+  justify-content: start;
+  flex-direction: row;
+  color: var(--text-color);
+  font-weight: 500;
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+.icon {
+  font-size: 12px;
+  position: relative;
+  margin-top: -20px;
+  float: right;
+  color: var(--text-color);
+}
+.questionTitle {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-top: 18px;
+  padding-bottom: 18px;
+}
+.questionTitle p {
+  color: var(--text-color);
+  font-size: 18px;
+}
+.answer {
+  color: var(--text-color);
+  font-size: 16px;
+}
+.specialAnswer {
+  padding: 20px 20px 30px 20px;
+}
+hr {
+  margin-top: 8px;
+  height: 0.3px;
+  background-color: #343232;
+  border: none;
+}
+.allQuestions {
+  margin-bottom: 20px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.allQuestions a {
+  text-decoration: none;
+  font-size: 17px;
+  color: var(--blue-color);
+  font-weight: bolder;
+}
+.none {
+  display: none;
+}
+
+.vis {
+  visibility: hidden;
+  display: none;
 }
