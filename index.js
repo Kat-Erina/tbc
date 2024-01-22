@@ -12,14 +12,10 @@ const darkerContainer = document.querySelector(".darker");
 const allQuestions = document.querySelectorAll(".question");
 const questionsContainer = document.querySelector(".questionsContainer");
 
-let sideBarisOpen = false;
 // closing side Bar menu
 function closeSideMenuFnc() {
-  //   popUpMenu.classList.add("closeMenuStyle");
-  // darkerContainer.style.height = "0";
   closeMenuBtn.classList.toggle("invisible");
   popUpMenu.classList.toggle("visible");
-  // sideBarisOpen = false;
   body.style.overflow = "auto";
   setTimeout(() => {
     menuList.classList.add("invisible");
@@ -28,12 +24,9 @@ function closeSideMenuFnc() {
 }
 // opening sidebar menu
 function openSideBar() {
-  //   popUpMenu.classList.remove("closeMenuStyle");
-
   popUpMenu.classList.remove("invisible");
   popUpMenu.classList.add("visible");
   body.style.overflow = "hidden";
-  // sideBarisOpen = true;
   closeMenuBtn.classList.remove("invisible");
   setTimeout(() => {
     menuList.classList.remove("invisible");
@@ -52,14 +45,21 @@ navBarBtn.addEventListener("click", () => {
   openSideBar();
 });
 
-//changing transparency  on header based on position
+// window Scroll function below
+
+let perviousScrollTop = 0;
 
 window.addEventListener("scroll", () => {
-  if (window.pageYOffset > 5) {
+  let currentScrollTop = window.scrollY || document.documentElement.scrollTop;
+  if (currentScrollTop > perviousScrollTop) {
     header.style.backgroundColor = "rgba(38, 36, 36, 0.96)";
+    header.style.transform = "translateY(-100px)";
   } else {
     header.style.backgroundColor = "rgb(38, 36, 36)";
+    header.style.transform = "translateY(0)";
   }
+
+  perviousScrollTop = currentScrollTop;
 });
 
 window.addEventListener("click", (e) => {
@@ -67,88 +67,6 @@ window.addEventListener("click", (e) => {
     closeSideMenuFnc();
   }
 });
-
-/*
-// creating slider
-let partnerArray = document.querySelectorAll(".partner");
-const partners = document.querySelector(".partners");
-const partnersContainer = document.querySelector(".partnersContainer");
-let activeSlide = 0;
-const totalSlidesAmount = document.querySelectorAll(".partner").length;
-
-console.log(partnerArray);
-partnerArray.forEach((el) => {
-  console.log(el.offsetWidth);
-});
-
-// let cur = 0;
-// function updateCarousel() {
-//   if (cur < 3) {
-//     setInterval(() => {
-//       console.log(cur);
-//       partnerArray[cur].style.transform = `translateX(-100px)`;
-
-//       console.log(cur);
-//       console.log(partnerArray[cur]);
-//       cur++;
-//     }, 500);
-//   } else cur = 0;
-// }
-
-// function updateCarousel() {
-//   partnerArray.forEach((partner, index) => {
-//     partner.style.transform = `translateX(${
-//       partner.offsetWidth * (index - 1)
-//     }px )`;
-//     // Adjust the interval duration as needed for each div
-//   });
-// }
-
-function updateCarousel() {
-  let val = 1;
-  if (val < 3) {
-    console.log(val);
-    partnerArray.forEach((partner, index) => {
-      partner.style.transform = `translateX(${
-        partner.offsetWidth * (index - val)
-      }px )`;
-    });
-    val++;
-    console.log(val);
-  }
-}
-
-updateCarousel();
-
-// updateCarousel();
-// setInterval(() => updateCarousel(), 500);
-
-// updateSlide();
-//chatgpt is daweerili
-// function updateCarousel() {
-//   // const partnersContainer = document.querySelector(".partnersContainer");
-//   const slideWidth = document.querySelector(".partner").clientWidth;
-//   partner.style.transform = `translateX(${-activeSlide * slideWidth}px)`;
-// }
-// updateCarousel();
-// const slideWidth = document.querySelector(".partner").clientWidth;
-// console.log(slideWidth);
-// function nextSlide() {
-//   activeSlide = (activeSlide + 1) % totalSlides;
-//   updateCarousel();
-// }
-
-// function prevSlide() {
-//   activeSlide = (activeSlide - 1 + totalSlides) % totalSlides;
-//   updateCarousel();
-// }
-*/
-
-// creating quations/answers div
-
-{
-  /* <i class="fa-solid fa-angle-up"></i> */
-}
 
 //writing Q&! functionality
 
