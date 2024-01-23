@@ -1,16 +1,16 @@
 // getting HTML elements
 const body = document.querySelector("body");
-const popUpMenu = document.querySelector(".popUpMenu");
-const closeMenuBtn = document.querySelector(".closeMenu");
-const menuList = document.querySelector(".menuList");
-const navBarBtn = document.querySelector(".navBar");
+const popUpMenu = document.querySelector(".popup-menu");
+const closeMenuBtn = document.querySelector(".close-menu");
+const menuList = document.querySelector(".menu-list");
+const navBarBtn = document.querySelector(".navbar-btn");
 const main = document.querySelector("main");
 const header = document.querySelector("header");
 const nav = document.querySelector("nav");
 const aside = document.querySelector("aside");
 const darkerContainer = document.querySelector(".darker");
 const allQuestions = document.querySelectorAll(".question");
-const questionsContainer = document.querySelector(".questionsContainer");
+const questionsContainer = document.querySelector(".questions-container");
 
 // closing side Bar menu
 function closeSideMenuFnc() {
@@ -100,3 +100,71 @@ function toggleIcon(param) {
   } else targetedIcon.innerHTML = '<i class="fa-solid fa-angle-down icon"></i>';
   console.log(targetedIcon.childNodes);
 }
+
+// Slider Functionality
+let partners = document.querySelectorAll(".partner");
+
+let initialValue = 1;
+let maxValue = partners.length;
+
+let intervalId;
+
+function changeDiv(count) {
+  clearInterval(intervalId); // Clear the existing interval
+  intervalId = setInterval(() => {
+    partners.forEach((partner) => {
+      if (partner.id == count) {
+        partner.classList.add("visible-div");
+        console.log("jhv");
+      } else {
+        partner.classList.remove("visible-div");
+      }
+    });
+
+    count++;
+
+    if (count === maxValue) {
+      count = 0;
+    }
+  }, 3000);
+}
+
+changeDiv(initialValue);
+
+const dots = document.querySelectorAll(".dot");
+
+dots.forEach((dot, ind) => {
+  dot.addEventListener("click", () => {
+    changeDiv(ind);
+  });
+});
+
+const leftDirection = document.querySelector(".fa-chevron-left");
+const rightDirection = document.querySelector(".fa-chevron-right");
+
+function findCurrDiv() {
+  partners = document.querySelectorAll(".partner");
+
+  let [targetedItem] = Array.from(partners).filter((partner) => {
+    return partner.classList.contains("visible-div");
+  });
+  let index = targetedItem.id;
+
+  return Number(index);
+}
+
+leftDirection.addEventListener("click", (e) => {
+  e.preventDefault();
+  let divId = findCurrDiv();
+  if (divId == 0) {
+    changeDiv(2);
+  } else changeDiv(divId - 1);
+});
+
+rightDirection.addEventListener("click", (e) => {
+  e.preventDefault();
+  let divId = findCurrDiv();
+  if (divId == 2) {
+    changeDiv(0);
+  } else changeDiv(divId + 1);
+});
