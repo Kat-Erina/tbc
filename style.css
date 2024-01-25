@@ -155,15 +155,30 @@ img {
 
 .image-containers {
   background-image: url("./images/main.png");
-  background-position: center center;
+  background-position: center;
   background-size: cover;
+  object-fit: cover;
   height: 40vh;
+  /* width: 80%; */
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-left: 20px;
+  /* padding-left: 20px; */
+  border: 1px solid red;
 }
+.informative-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgb(0, 170, 255);
+}
+
 .image-containers p {
+  padding: 0;
+  margin: 0;
+  width: 80%;
+  border: 1px solid red;
   font-size: 28px;
   line-height: 1.5;
   font-weight: 900;
@@ -173,7 +188,8 @@ img {
 .program-review {
   padding: 35px 20px 35px 20px;
   line-height: 1.3;
-  font-size: 28px;
+  width: 100%;
+  border: 1px solid red;
 }
 
 .program-review p {
@@ -198,23 +214,33 @@ img {
 .courses-container {
   padding: 20px;
   background-color: var(--dark-black-color);
+  /* border: 5px solid rgb(255, 89, 0); */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .courses-container h1 {
-  font-size: 30px;
+  font-size: 25px;
   letter-spacing: 0.6px;
   color: var(--text-color);
-  font-weight: 100;
+  font-weight: lighter;
   padding-bottom: 25px;
+  border: 1px solid red;
+  width: 100%;
 }
 .courses {
   display: flex;
   flex-direction: column;
+  /* border: 3px solid green; */
+  width: 100%;
 }
 
 .child-course {
   border: 1px solid rgb(73, 73, 73);
   border-radius: 10px;
   margin-bottom: 20px;
+  border: 3px solid yellow;
 }
 
 .child-course img {
@@ -263,7 +289,7 @@ img {
 
 /* styling partners container  for big screen*/
 
-.partners {
+/* .partners {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -301,8 +327,50 @@ img {
   width: 20%;
   height: 25%;
   margin-bottom: 5%;
-}
+} */
 
+.partners {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid green;
+  padding: 20px 20px 0px 20px;
+  color: var(--text-color);
+
+  height: 460px;
+}
+.partners p {
+  font-size: 22px !important;
+}
+.partnersContainer {
+  width: 100%;
+  height: 100%;
+  flex-direction: row;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid yellow;
+}
+.partner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  border: 3px solid red;
+  width: 100%;
+  position: absolute;
+  height: 100%;
+  top: 0;
+  left: 0;
+  transition: opacity 1.5s ease-in-out;
+}
+.partner img {
+  width: 65%;
+  height: 16%;
+  margin-bottom: 10%;
+}
 .partner-div1 {
   opacity: 0;
 }
@@ -327,9 +395,10 @@ img {
   flex-direction: row;
   justify-content: center;
   position: absolute;
-  bottom: 20%;
+  bottom: 5%;
   left: 50%;
   width: 100%;
+  border: 2px solid blue;
   transform: translateX(-50%);
   gap: 5px;
   z-index: 4;
@@ -350,19 +419,25 @@ img {
   display: flex;
   flex-direction: row;
   position: absolute;
-  top: 40%;
+  /* top: 40%; */
   left: 50%;
   width: 100%;
   transform: translateX(-50%);
   z-index: 10;
   justify-content: space-between;
-  padding-left: 5%;
-  padding-right: 5%;
+
+  border: 3px solid red;
+  display: none;
 }
 
 .directions i {
   font-size: 35px;
   color: rgb(157, 154, 154);
+}
+.partners p {
+  font-size: 18px;
+  border: 1px solid red;
+  width: 100%;
 }
 /* styling Q&A */
 
@@ -430,5 +505,143 @@ hr {
   font-weight: bolder;
 }
 .none {
+  display: none;
+}
+
+@media screen and (min-width: 420px) {
+  .child-course img {
+    height: 320px;
+  }
+  header {
+    padding: 20px;
+  }
+}
+
+@media screen and (min-width: 550px) {
+  .menu-list li a {
+    font-size: 28px;
+  }
+  .menu-list li {
+    margin-top: 20px;
+  }
+  .close-menu {
+    font-size: 40px;
+  }
+}
+@media screen and (min-width: 760px) {
+  .child-course img {
+    height: 280px;
+  }
+  .image-containers {
+    height: 350px;
+    /* background-size: 100%; */
+
+    /* background-size:; */
+    /* background-size: contain; */
+    background-position: center top;
+    background-repeat: no-repeat;
+    /* height: 100vh; */
+  }
+
+  header {
+    padding: 20px;
+    /* display: none; */
+  }
+  .image-containers p {
+    width: 80%;
+    border: 1px solid red;
+  }
+  .program-review {
+    border: 1px solid red;
+    width: 80%;
+    /* transform: translateX(12%); */
+  }
+  /* .navbar-menu {
+    display: block;
+  } */
+  .courses-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .courses {
+    width: 80vw;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+    border: 1px solid yellow;
+  }
+  .child-course div p {
+    font-size: 16px;
+  }
+  .child-course div p a {
+    font-size: 15px;
+    display: flex;
+  }
+  .child-course div p a i {
+    /* padding-top: 5px; */
+    font-size: 15px;
+    border: 1px solid red;
+    color: var(--blue-color);
+    padding: 0;
+    padding-right: 10px;
+  }
+  .child-course div p a span {
+    color: var(--blue-color);
+    text-decoration: none;
+    white-space: nowrap;
+    /* text-overflow: none; */
+  }
+  .courses-container h1 {
+    /* margin-left: -20rem;
+    left */
+    left: 0;
+  }
+  .child-course {
+    border: 1px solid red;
+    /* height: 300px; */
+  }
+  .child-course img {
+    height: 180px;
+  }
+
+  .questions-main-container {
+    border: 1px solid rgb(51, 255, 0);
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* padding-left: 20%; */
+    /* width: 70%; */
+    /* transform: translateX(22%); */
+  }
+  .questions-container {
+    border: 1px solid red;
+    display: flex;
+    flex-direction: row;
+    /* width: 60%; */
+    justify-content: space-between;
+  }
+  .questions-container p {
+    /* border: 1px solid red;
+    display: flex;
+    flex-direction: row;
+    width: 100%; */
+    /* transform: translateX(45%); */
+  }
+  .questions {
+    border: 1px solid red;
+    /* transform: translateX(22%); */
+    /* width: 60%; */
+  }
+  .more-questions2 {
+    text-decoration: none;
+    font-size: 18px;
+    color: var(--blue-color);
+  }
+}
+
+.hidden {
   display: none;
 }

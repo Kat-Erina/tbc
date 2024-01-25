@@ -129,7 +129,7 @@ function changeDiv(count) {
   }, 3000);
 }
 
-changeDiv(initialValue);
+changeDiv(0);
 
 const dots = document.querySelectorAll(".dot");
 
