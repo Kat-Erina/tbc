@@ -1,3 +1,4 @@
+"use strict";
 // getting HTML elements
 const body = document.querySelector("body");
 const popUpMenu = document.querySelector(".popup-menu");
@@ -11,6 +12,10 @@ const aside = document.querySelector("aside");
 const darkerContainer = document.querySelector(".darker");
 const allQuestions = document.querySelectorAll(".question");
 const questionsContainer = document.querySelector(".questions-container");
+const partnerMainContainer = document.querySelector(".partners");
+const leftDirection = document.querySelector(".fa-chevron-left");
+const rightDirection = document.querySelector(".fa-chevron-right");
+const dots = document.querySelectorAll(".dot");
 
 // closing side Bar menu
 function closeSideMenuFnc() {
@@ -86,8 +91,10 @@ function toggleAnswer(param) {
       if (el.classList.contains("none")) {
         el.classList.remove("none");
       } else el.classList.add("none");
+      // toggleIcon(el);
     } else {
       el.classList.add("none");
+      // toggleIcon(el);
     }
   });
 }
@@ -95,6 +102,13 @@ function toggleAnswer(param) {
 function toggleIcon(param) {
   let icons = Array.from(document.querySelectorAll(".iconSpan"));
   let targetedIcon = icons[param];
+  icons.forEach((el) => {
+    if (el != targetedIcon) {
+      if ((el.innerHTML = "<i class='fa-solid fa-angle-up icon'></i>")) {
+        el.innerHTML = '<i class="fa-solid fa-angle-down icon"></i>';
+      }
+    }
+  });
   if (targetedIcon.childNodes[0].classList.contains("fa-angle-down")) {
     targetedIcon.innerHTML = "<i class='fa-solid fa-angle-up icon'></i>";
   } else targetedIcon.innerHTML = '<i class="fa-solid fa-angle-down icon"></i>';
@@ -129,18 +143,11 @@ function changeDiv(count) {
   }, 3000);
 }
 
-changeDiv(0);
-
-const dots = document.querySelectorAll(".dot");
-
 dots.forEach((dot, ind) => {
   dot.addEventListener("click", () => {
     changeDiv(ind);
   });
 });
-
-const leftDirection = document.querySelector(".fa-chevron-left");
-const rightDirection = document.querySelector(".fa-chevron-right");
 
 function findCurrDiv() {
   partners = document.querySelectorAll(".partner");
@@ -168,3 +175,31 @@ rightDirection.addEventListener("click", (e) => {
     changeDiv(0);
   } else changeDiv(divId + 1);
 });
+
+function stopCarousel() {
+  clearInterval(intervalId);
+}
+
+// Options for the Intersection Observer
+const options = {
+  root: null,
+  rootMargin: "0px",
+  threshold: 0.2,
+};
+
+function handleIntersection(entries) {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      changeDiv(0);
+    } else {
+      stopCarousel();
+    }
+  });
+}
+
+const intersectionObserver = new IntersectionObserver(
+  handleIntersection,
+  options
+);
+
+intersectionObserver.observe(partnerMainContainer);
