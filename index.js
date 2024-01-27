@@ -1,5 +1,5 @@
 "use strict";
-// getting HTML elements
+// Creating DOM  elements
 const body = document.querySelector("body");
 const popUpMenu = document.querySelector(".popup-menu");
 const closeMenuBtn = document.querySelector(".close-menu");
@@ -16,6 +16,7 @@ const partnerMainContainer = document.querySelector(".partners");
 const leftDirection = document.querySelector(".fa-chevron-left");
 const rightDirection = document.querySelector(".fa-chevron-right");
 const dots = document.querySelectorAll(".dot");
+const partnersContainer = document.querySelector(".partnersContainer");
 
 // closing side Bar menu
 function closeSideMenuFnc() {
@@ -29,8 +30,7 @@ function closeSideMenuFnc() {
 }
 // opening sidebar menu
 function openSideBar() {
-  popUpMenu.classList.remove("invisible");
-  popUpMenu.classList.add("visible");
+  popUpMenu.classList.toggle("visible");
   body.style.overflow = "hidden";
   closeMenuBtn.classList.remove("invisible");
   setTimeout(() => {
@@ -42,6 +42,7 @@ function openSideBar() {
   }, 100);
 }
 
+// attaching handler function to open and close BTNs
 closeMenuBtn.addEventListener("click", () => {
   closeSideMenuFnc();
 });
@@ -52,18 +53,25 @@ navBarBtn.addEventListener("click", () => {
 
 // window Scroll function below
 
-let perviousScrollTop = 0;
+function setStickyHeader() {
+  header.style.backgroundColor = "rgb(38, 36, 36)";
+  header.style.transform = "translateY(0)";
+}
 
+function removeStickyHeader() {
+  header.style.backgroundColor = "rgba(38, 36, 36, 0.96)";
+  header.style.transform = "translateY(-100px)";
+}
+let perviousScrollTop = 0;
 window.addEventListener("scroll", () => {
   let currentScrollTop = window.scrollY || document.documentElement.scrollTop;
-  if (currentScrollTop > perviousScrollTop) {
-    header.style.backgroundColor = "rgba(38, 36, 36, 0.96)";
-    header.style.transform = "translateY(-100px)";
+  if (body.clientWidth > 1000) {
+    setStickyHeader();
   } else {
-    header.style.backgroundColor = "rgb(38, 36, 36)";
-    header.style.transform = "translateY(0)";
+    currentScrollTop > perviousScrollTop
+      ? removeStickyHeader()
+      : setStickyHeader();
   }
-
   perviousScrollTop = currentScrollTop;
 });
 
@@ -82,73 +90,68 @@ allQuestions.forEach((child, index) => {
   });
 });
 
+// opening and closing answer function
 function toggleAnswer(param) {
   let allAnswers = Array.from(document.querySelectorAll(".answer"));
   let [targetedElement] = allAnswers.filter((item) => item.id == param);
 
   allAnswers.forEach((el) => {
     if (el == targetedElement) {
-      if (el.classList.contains("none")) {
-        el.classList.remove("none");
-      } else el.classList.add("none");
-      // toggleIcon(el);
+      el.classList.contains("none")
+        ? el.classList.remove("none")
+        : el.classList.add("none");
     } else {
       el.classList.add("none");
-      // toggleIcon(el);
     }
   });
 }
 
+//changing icon function
 function toggleIcon(param) {
   let icons = Array.from(document.querySelectorAll(".iconSpan"));
   let targetedIcon = icons[param];
   icons.forEach((el) => {
     if (el != targetedIcon) {
-      if ((el.innerHTML = "<i class='fa-solid fa-angle-up icon'></i>")) {
-        el.innerHTML = '<i class="fa-solid fa-angle-down icon"></i>';
-      }
+      el.innerHTML = '<i class="fa-solid fa-angle-down icon"></i>';
     }
   });
-  if (targetedIcon.childNodes[0].classList.contains("fa-angle-down")) {
-    targetedIcon.innerHTML = "<i class='fa-solid fa-angle-up icon'></i>";
-  } else targetedIcon.innerHTML = '<i class="fa-solid fa-angle-down icon"></i>';
-  console.log(targetedIcon.childNodes);
+  targetedIcon.childNodes[0].classList.contains("fa-angle-down")
+    ? (targetedIcon.innerHTML = "<i class='fa-solid fa-angle-up icon'></i>")
+    : (targetedIcon.innerHTML = '<i class="fa-solid fa-angle-down icon"></i>');
 }
 
 // Slider Functionality
 let partners = document.querySelectorAll(".partner");
 
 let initialValue = 1;
-let maxValue = partners.length;
+let maxValue = 7;
 
 let intervalId;
 
+// automatically changing partner divs function
 function changeDiv(count) {
   clearInterval(intervalId); // Clear the existing interval
   intervalId = setInterval(() => {
     partners.forEach((partner) => {
-      if (partner.id == count) {
-        partner.classList.add("visible-div");
-        console.log("jhv");
-      } else {
-        partner.classList.remove("visible-div");
-      }
+      partner.id == count
+        ? partner.classList.add("visible-div")
+        : partner.classList.remove("visible-div");
     });
-
     count++;
-
     if (count === maxValue) {
-      count = 0;
+      count = 4;
     }
   }, 3000);
 }
 
+// changing partners divs on dot click event
 dots.forEach((dot, ind) => {
   dot.addEventListener("click", () => {
-    changeDiv(ind);
+    changeDiv(ind + 4);
   });
 });
 
+// finding active/visible partner div
 function findCurrDiv() {
   partners = document.querySelectorAll(".partner");
 
@@ -160,26 +163,32 @@ function findCurrDiv() {
   return Number(index);
 }
 
+function targetActivePartnerLeft() {
+  let divId = findCurrDiv();
+  divId == 4 ? changeDiv(6) : changeDiv(divId - 1);
+}
+
+// attaching handler function to right and left direction icons
 leftDirection.addEventListener("click", (e) => {
   e.preventDefault();
-  let divId = findCurrDiv();
-  if (divId == 0) {
-    changeDiv(2);
-  } else changeDiv(divId - 1);
+
+  targetActivePartnerLeft();
 });
 
+function targetActivePartnerRight() {
+  let divId = findCurrDiv();
+  divId == 6 ? changeDiv(4) : changeDiv(divId + 1);
+}
 rightDirection.addEventListener("click", (e) => {
   e.preventDefault();
-  let divId = findCurrDiv();
-  if (divId == 2) {
-    changeDiv(0);
-  } else changeDiv(divId + 1);
+  targetActivePartnerRight();
 });
 
 function stopCarousel() {
   clearInterval(intervalId);
 }
 
+// function for when partner functionality should be called
 // Options for the Intersection Observer
 const options = {
   root: null,
@@ -189,11 +198,7 @@ const options = {
 
 function handleIntersection(entries) {
   entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      changeDiv(0);
-    } else {
-      stopCarousel();
-    }
+    entry.isIntersecting ? changeDiv(4) : stopCarousel();
   });
 }
 
@@ -203,3 +208,36 @@ const intersectionObserver = new IntersectionObserver(
 );
 
 intersectionObserver.observe(partnerMainContainer);
+
+// Working on Slider Touch events
+
+let startCord = 0;
+let currentCord = 0;
+
+partnersContainer.addEventListener("touchstart", touchStart);
+partnersContainer.addEventListener("touchmove", touchFinish);
+
+function touchStart(event) {
+  startCord = event.touches[0].clientX;
+}
+
+function touchFinish(event) {
+  if (startCord === 0) return;
+
+  currentCord = event.touches[0].clientX;
+  let swipedX = currentCord - startCord;
+
+  if (swipedX > 0) {
+    let divId = findCurrDiv();
+    if (divId == 4) {
+      changeDiv(6);
+    } else changeDiv(divId - 1);
+  } else if (swipedX < 0) {
+    let divId = findCurrDiv();
+    if (divId == 6) {
+      changeDiv(4);
+    } else changeDiv(divId + 1);
+  }
+
+  startCord = 0;
+}
