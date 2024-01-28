@@ -145,9 +145,9 @@ function changeDiv(count) {
 }
 
 // changing partners divs on dot click event
-dots.forEach((dot, ind) => {
+dots.forEach((dot) => {
   dot.addEventListener("click", () => {
-    changeDiv(ind + 4);
+    changeDiv(dot.id - 3);
   });
 });
 

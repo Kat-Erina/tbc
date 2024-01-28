@@ -13,7 +13,6 @@
 }
 body {
   background-color: var(--bg-color-2);
-  font-family: Arial, Helvetica, sans-serif;
 }
 
 /* styling sideBar  */
@@ -385,6 +384,7 @@ img {
   color: var(--text-color);
   font-size: 16px;
   padding: 10px;
+  transition: all 0.3s ease-in-out;
 }
 .specialAnswer {
   padding: 20px 20px 30px 20px;
@@ -470,6 +470,7 @@ footer {
   padding: 10px;
   border-radius: 50%;
   background-color: rgb(147, 147, 146);
+  color: rgb(20, 17, 17);
 }
 .fa-facebook-f {
   margin-right: 15px;
