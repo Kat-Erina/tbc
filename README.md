@@ -25,12 +25,6 @@
 - CSS: CSS3
   -Responsive დიზაინის შესაქმნელად
 - JavaScript: ES6;
-  -გამოყენებულია როგორც DOM, ასევე WEB Platform API :
-  DOM API ვგჭირდება:
-
-  - ელემენტებზე მანიპულაციისთვის, კერძოდ, მენიუს და სანავიგაციო ღილაკების გამოჩენისა და დახურვისთვის (openSideBar,closeSideMenuFnc), მენიუს დახურვის, პარტნიორების სლაიდერის ფუნქციონალისთვის (changeDiv, targetActivePartnerLeft,targetActivePartnerRight) კითხვების პასუხების გამოჩენისა და დამალვის ფუნქციონალისთვის (toggleIcon, toggleAnswer)
-  - WEB Platform API :
-  - header ელემენტის სქროლის დროს დამალვისა და გამოჩენის ფუნქციონალის შესაქმნელად (new IntersectionObserver), ასევე მობილურის ვერსიაზე სლაიდერის შეხებისას მუშაობისთვის
 
 - Version Control: Git ([Repository Link](https://github.com/Kat-Erina/tbc))
 

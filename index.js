@@ -124,7 +124,7 @@ function toggleIcon(param) {
 let partners = document.querySelectorAll(".partner");
 
 let initialValue = 1;
-let maxValue = 7;
+let maxValue = 3;
 
 let intervalId;
 
@@ -133,13 +133,13 @@ function changeDiv(count) {
   clearInterval(intervalId); // Clear the existing interval
   intervalId = setInterval(() => {
     partners.forEach((partner) => {
-      partner.id == count
+      partner.getAttribute("data-id") == count
         ? partner.classList.add("visible-div")
         : partner.classList.remove("visible-div");
     });
     count++;
     if (count === maxValue) {
-      count = 4;
+      count = 0;
     }
   }, 3000);
 }
@@ -147,7 +147,8 @@ function changeDiv(count) {
 // changing partners divs on dot click event
 dots.forEach((dot) => {
   dot.addEventListener("click", () => {
-    changeDiv(dot.id - 3);
+    let id = dot.getAttribute("data-custom-id");
+    changeDiv(id);
   });
 });
 
@@ -158,29 +159,26 @@ function findCurrDiv() {
   let [targetedItem] = Array.from(partners).filter((partner) => {
     return partner.classList.contains("visible-div");
   });
-  let index = targetedItem.id;
+  let index = targetedItem.getAttribute("data-id");
 
   return Number(index);
 }
 
 function targetActivePartnerLeft() {
   let divId = findCurrDiv();
-  divId == 4 ? changeDiv(6) : changeDiv(divId - 1);
+  divId == 0 ? changeDiv(2) : changeDiv(divId - 1);
 }
 
 // attaching handler function to right and left direction icons
-leftDirection.addEventListener("click", (e) => {
-  e.preventDefault();
-
+leftDirection.addEventListener("click", () => {
   targetActivePartnerLeft();
 });
 
 function targetActivePartnerRight() {
   let divId = findCurrDiv();
-  divId == 6 ? changeDiv(4) : changeDiv(divId + 1);
+  divId == 2 ? changeDiv(0) : changeDiv(divId + 1);
 }
-rightDirection.addEventListener("click", (e) => {
-  e.preventDefault();
+rightDirection.addEventListener("click", () => {
   targetActivePartnerRight();
 });
 
@@ -198,7 +196,7 @@ const options = {
 
 function handleIntersection(entries) {
   entries.forEach((entry) => {
-    entry.isIntersecting ? changeDiv(4) : stopCarousel();
+    entry.isIntersecting ? changeDiv(0) : stopCarousel();
   });
 }
 
@@ -229,13 +227,13 @@ function touchFinish(event) {
 
   if (swipedX > 0) {
     let divId = findCurrDiv();
-    if (divId == 4) {
-      changeDiv(6);
+    if (divId == 0) {
+      changeDiv(2);
     } else changeDiv(divId - 1);
   } else if (swipedX < 0) {
     let divId = findCurrDiv();
-    if (divId == 6) {
-      changeDiv(4);
+    if (divId == 2) {
+      changeDiv(0);
     } else changeDiv(divId + 1);
   }
 
