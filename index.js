@@ -108,7 +108,7 @@ function toggleAnswer(param) {
 
 //changing icon function
 function toggleIcon(param) {
-  let icons = Array.from(document.querySelectorAll(".iconSpan"));
+  let icons = Array.from(document.querySelectorAll(".icon-span"));
   let targetedIcon = icons[param];
   icons.forEach((el) => {
     if (el != targetedIcon) {
