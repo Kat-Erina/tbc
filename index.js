@@ -16,7 +16,7 @@ const partnerMainContainer = document.querySelector(".partners");
 const leftDirection = document.querySelector(".fa-chevron-left");
 const rightDirection = document.querySelector(".fa-chevron-right");
 const dots = document.querySelectorAll(".dot");
-const partnersContainer = document.querySelector(".partnersContainer");
+const partnersContainer = document.querySelector(".partners-container");
 
 // closing side Bar menu
 function closeSideMenuFnc() {
