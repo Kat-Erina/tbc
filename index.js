@@ -130,18 +130,24 @@ let intervalId;
 
 // automatically changing partner divs function
 function changeDiv(count) {
-  clearInterval(intervalId); // Clear the existing interval
+  clearInterval(intervalId);
+  partners.forEach((partner) => {
+    partner.getAttribute("data-id") == count
+      ? partner.classList.add("visible-div")
+      : partner.classList.remove("visible-div");
+  });
+
   intervalId = setInterval(() => {
+    count++;
+    if (count === maxValue) {
+      count = 0;
+    }
     partners.forEach((partner) => {
       partner.getAttribute("data-id") == count
         ? partner.classList.add("visible-div")
         : partner.classList.remove("visible-div");
     });
-    count++;
-    if (count === maxValue) {
-      count = 0;
-    }
-  }, 3000);
+  }, 4000);
 }
 
 // changing partners divs on dot click event
@@ -164,27 +170,16 @@ function findCurrDiv() {
   return Number(index);
 }
 
-function targetActivePartnerLeft() {
-  let divId = findCurrDiv();
-  divId == 0 ? changeDiv(2) : changeDiv(divId - 1);
-}
-
 // attaching handler function to right and left direction icons
 leftDirection.addEventListener("click", () => {
-  targetActivePartnerLeft();
+  let divId = findCurrDiv();
+  divId == 0 ? changeDiv(2) : changeDiv(divId - 1);
 });
 
-function targetActivePartnerRight() {
+rightDirection.addEventListener("click", () => {
   let divId = findCurrDiv();
   divId == 2 ? changeDiv(0) : changeDiv(divId + 1);
-}
-rightDirection.addEventListener("click", () => {
-  targetActivePartnerRight();
 });
-
-function stopCarousel() {
-  clearInterval(intervalId);
-}
 
 // function for when partner functionality should be called
 // Options for the Intersection Observer
@@ -196,7 +191,9 @@ const options = {
 
 function handleIntersection(entries) {
   entries.forEach((entry) => {
-    entry.isIntersecting ? changeDiv(0) : stopCarousel();
+    if (entry.isIntersecting) {
+      changeDiv(0);
+    } else clearInterval(intervalId);
   });
 }
 
