@@ -1,5 +1,5 @@
 **მოცემული პროექტი შეიქმნა TBC აკადემიის კონკურსის ფარგლებში**
-website linke: https://tbccloneproject.netlify.app/
+website link: https://tbccloneproject.netlify.app/
 **პროექტის სტრუქტურა**
 პროექტი შედგება შემდეგი ფაილებისგან:
 
@@ -23,7 +23,6 @@ website linke: https://tbccloneproject.netlify.app/
 
 - HTML: HTML5
 - CSS: CSS3
-  -Responsive დიზაინის შესაქმნელად
 - JavaScript: ES6;
 
 - Version Control: Git ([Repository Link](https://github.com/Kat-Erina/tbc))
